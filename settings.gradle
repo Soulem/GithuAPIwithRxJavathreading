@@ -1,0 +1,2 @@
+rootProject.name = "Githu API with RxJava threading"
+include ':app'
