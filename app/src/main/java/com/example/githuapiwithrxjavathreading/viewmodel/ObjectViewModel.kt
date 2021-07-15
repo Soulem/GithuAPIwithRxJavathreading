@@ -8,9 +8,6 @@ import com.example.githuapiwithrxjavathreading.network.GitAPIRetrofit
 import com.example.githuapiwithrxjavathreading.utl.GitAPISingleton.Companion.gitAPIComponent
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class ObjectViewModel: ViewModel() {
     companion object {

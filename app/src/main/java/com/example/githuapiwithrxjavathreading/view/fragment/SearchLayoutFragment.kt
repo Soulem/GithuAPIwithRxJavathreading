@@ -5,21 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.githuapiwithrxjavathreading.R
-import com.example.githuapiwithrxjavathreading.databinding.FragmentRecyclerDisplayLayoutBinding
 import com.example.githuapiwithrxjavathreading.databinding.FragmentSearchLayoutBinding
 import com.example.githuapiwithrxjavathreading.view.adapter.RecyclerDisplayAdapter
 import com.example.githuapiwithrxjavathreading.viewmodel.ObjectViewModel
 
-class SearchLayoutFragment : Fragment() {
-    companion object {
-    @JvmStatic
-    fun newInstance(param1: String, param2: String) =
-        SearchLayoutFragment().apply {
-        }
-}
+class SearchLayoutFragment() : Fragment() {
     private lateinit var binding: FragmentSearchLayoutBinding
-
+    private lateinit var adapter: RecyclerDisplayAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,8 +32,12 @@ class SearchLayoutFragment : Fragment() {
         binding.searchUserButton.setOnClickListener{
             ObjectViewModel.instance.searchUser(binding.userNameEditText.text.toString())
             ObjectViewModel.instance.gitAPIData.observe(viewLifecycleOwner, {
-                RecyclerDisplayAdapter.instance.apiList = it
+                adapter.apiList = it
             })
         }
+    }
+
+    fun setAdapter(adapter: RecyclerDisplayAdapter){
+        this.adapter = adapter
     }
 }

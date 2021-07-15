@@ -1,5 +1,10 @@
 package com.example.githuapiwithrxjavathreading.model.data.github
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
+
+@Parcelize
 data class GitRetrofitItem(
     val archive_url: String,
     val archived: Boolean,
@@ -48,7 +53,7 @@ data class GitRetrofitItem(
     val license: License,
     val merges_url: String,
     val milestones_url: String,
-    val mirror_url: Any,
+    val mirror_url: @RawValue Any,
     val name: String,
     val node_id: String,
     val notifications_url: String,
@@ -74,4 +79,4 @@ data class GitRetrofitItem(
     val url: String,
     val watchers: Int,
     val watchers_count: Int
-)
+): Parcelable

@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.githuapiwithrxjavathreading.databinding.CardGitResultItemDisplayLayoutBinding
 import com.example.githuapiwithrxjavathreading.model.data.github.GitRetrofitItem
 
-class RecyclerDisplayAdapter(): RecyclerView.Adapter<RecyclerDisplayAdapter.CardItemHolder>() {
+class RecyclerDisplayAdapter(private val delegate: GitAPIDelegate): RecyclerView.Adapter<RecyclerDisplayAdapter.CardItemHolder>() {
     inner class CardItemHolder(val binding: CardGitResultItemDisplayLayoutBinding): RecyclerView.ViewHolder(binding.root)
 
-    companion object {
-        val instance  = RecyclerDisplayAdapter()
+    interface GitAPIDelegate{
+        fun selectItem(gitRetrofitItem: GitRetrofitItem)
     }
 
     var apiList : List<GitRetrofitItem> = listOf()
@@ -33,6 +33,9 @@ class RecyclerDisplayAdapter(): RecyclerView.Adapter<RecyclerDisplayAdapter.Card
         val item = apiList[position]
         holder.binding.apply {
             this.repoNameTextView.text = item.name
+            this.repoNameTextView.setOnClickListener{
+                delegate.selectItem(item)
+            }
         }
     }
 
