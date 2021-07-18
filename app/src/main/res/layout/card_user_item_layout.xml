@@ -6,45 +6,53 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/repo_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#e7f3ff">
 
         <ImageView
             android:id="@+id/user_profile_image"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_margin="24dp"
-            android:background="@drawable/ic_repo_icon"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:padding="16dp"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/repo_name_textView"
+            android:id="@+id/user_name_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:layout_marginBottom="66dp"
-            android:text="@string/repo_name_default"
+            android:text="@string/default_username"
             android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/user_profile_image"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textView"
             app:layout_constraintStart_toEndOf="@+id/user_profile_image"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/image_repo_icon"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="@drawable/ic_repo_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/user_profile_image"
+            app:layout_constraintEnd_toEndOf="@+id/user_name_tv"
+            app:layout_constraintStart_toStartOf="@+id/user_name_tv"
+            app:layout_constraintTop_toBottomOf="@+id/user_name_tv" />
+
         <TextView
-            android:id="@+id/repo_date_textView"
+            android:id="@+id/repo_count_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="@string/repo_date_default"
+            android:layout_margin="8dp"
+            android:text="8"
             android:textColor="@color/black"
-            android:textSize="12sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/user_profile_image"
-            app:layout_constraintEnd_toEndOf="@+id/repo_name_textView"
-            app:layout_constraintStart_toStartOf="@+id/repo_name_textView" />
+            app:layout_constraintStart_toEndOf="@+id/image_repo_icon"
+            app:layout_constraintTop_toBottomOf="@+id/user_name_tv" />
 
         <TextView
             android:id="@+id/textView"
