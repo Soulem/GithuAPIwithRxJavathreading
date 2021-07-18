@@ -3,8 +3,9 @@ package com.example.githuapiwithrxjavathreading.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.githuapiwithrxjavathreading.model.data.github.GitRetrofitItem
+import com.example.githuapiwithrxjavathreading.model.data.github.repo.GitRetrofitUserRepo
 import com.example.githuapiwithrxjavathreading.network.GitAPIRetrofit
+import com.example.githuapiwithrxjavathreading.utl.Constants.Companion.DEFAULT_USERS
 import com.example.githuapiwithrxjavathreading.utl.GitAPISingleton.Companion.gitAPIComponent
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -14,7 +15,7 @@ class ObjectViewModel: ViewModel() {
         val instance  = ObjectViewModel()
     }
 
-    val gitAPIData = MutableLiveData<List<GitRetrofitItem>>()
+    val gitAPIData = MutableLiveData<List<GitRetrofitUserRepo>>()
     private val compDisposable = CompositeDisposable()
     private val gitAPIRetrofit = GitAPIRetrofit()
 
@@ -35,7 +36,7 @@ class ObjectViewModel: ViewModel() {
 
                 },  {throwable ->
                     Log.d("TAG_X", "Oops: ${throwable.localizedMessage}")
-                    val list = gitAPIComponent.getComponentRepository().readFromCache()
+                    val list = gitAPIComponent.getComponentRepository().readFromCache(DEFAULT_USERS)
                     gitAPIData.postValue(list)
                 })
             //high order function - function that can take
@@ -67,7 +68,7 @@ class ObjectViewModel: ViewModel() {
 
                 },  {throwable ->
                     Log.d("TAG_X", "Oops: ${throwable.localizedMessage}")
-                    val list = gitAPIComponent.getComponentRepository().readFromCache()
+                    val list = gitAPIComponent.getComponentRepository().readFromCache(userName)
                     gitAPIData.postValue(list)
                 })
             //high order function - function that can take

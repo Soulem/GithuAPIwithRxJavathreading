@@ -1,11 +1,11 @@
-package com.example.githuapiwithrxjavathreading.model.data.github
+package com.example.githuapiwithrxjavathreading.model.data.github.repo
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.parcel.RawValue
 
 @Parcelize
-data class GitRetrofitItem(
+data class GitRetrofitUserRepo(
     val archive_url: String,
     val archived: Boolean,
     val assignees_url: String,

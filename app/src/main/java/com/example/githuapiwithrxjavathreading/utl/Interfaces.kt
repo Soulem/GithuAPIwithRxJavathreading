@@ -1,7 +1,7 @@
 package com.example.githuapiwithrxjavathreading.utl
 
-import com.example.githuapiwithrxjavathreading.model.data.github.GitRetrofitItem
+import com.example.githuapiwithrxjavathreading.model.data.github.repo.GitRetrofitUserRepo
 
 interface GitAPISelector{
-    fun openDetailsFragment(item: GitRetrofitItem)
+    fun openDetailsFragment(item: GitRetrofitUserRepo)
 }

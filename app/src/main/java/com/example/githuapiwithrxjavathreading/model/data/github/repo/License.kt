@@ -1,4 +1,4 @@
-package com.example.githuapiwithrxjavathreading.model.data.github
+package com.example.githuapiwithrxjavathreading.model.data.github.repo
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
