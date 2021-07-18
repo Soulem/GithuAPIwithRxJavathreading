@@ -2,6 +2,12 @@
     <string name="app_name">Githu API with RxJava threading</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="search_user_button_text">Search User Account</string>
+    <string name="search_user_button_text">Search</string>
     <string name="example_text">example text</string>
+    <string name="git_username">Git Username</string>
+    <string name="default_username">AlexisYA703</string>
+    <string name="repo_name_default">MVVM App</string>
+    <string name="repo_date_default">07-20-2021</string>
+    <string name="repo_link_default">https://github.com/Soulem/GithuAPIwithRxJavathreading</string>
+    <string name="commit_title_tv">Fragment Implementation</string>
 </resources>
