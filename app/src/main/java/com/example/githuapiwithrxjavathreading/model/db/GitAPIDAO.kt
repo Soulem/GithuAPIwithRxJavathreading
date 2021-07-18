@@ -4,14 +4,13 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
-import com.example.githuapiwithrxjavathreading.model.data.github.GitAPICache
-import com.example.githuapiwithrxjavathreading.utl.Constants.Companion.CACHE_KEY
+import com.example.githuapiwithrxjavathreading.model.data.github.repo.GitAPIRepoCache
 
 @Dao
 interface GitAPIDAO {
     @Insert(onConflict = REPLACE)
-    fun cacheData(data: GitAPICache)
+    fun cacheData(data: GitAPIRepoCache)
 
-    @Query("SELECT * FROM gitAPI_cache WHERE cache_id = $CACHE_KEY")
-    fun readFromCache(): GitAPICache
+    @Query("SELECT * FROM gitAPI_cache WHERE name = :username")
+    fun readFromCache(username: String): GitAPIRepoCache
 }

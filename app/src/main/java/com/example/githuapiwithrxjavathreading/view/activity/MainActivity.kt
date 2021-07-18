@@ -6,7 +6,7 @@ import android.util.Log
 import androidx.multidex.MultiDex
 import com.example.githuapiwithrxjavathreading.R
 import com.example.githuapiwithrxjavathreading.databinding.ActivityMainBinding
-import com.example.githuapiwithrxjavathreading.model.data.github.GitRetrofitItem
+import com.example.githuapiwithrxjavathreading.model.data.github.repo.GitRetrofitUserRepo
 import com.example.githuapiwithrxjavathreading.utl.GitAPISelector
 import com.example.githuapiwithrxjavathreading.view.fragment.DisplayItemFragment
 import com.example.githuapiwithrxjavathreading.view.fragment.RecyclerDisplayFragment
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity(), GitAPISelector {
         searchLayoutFragment.setAdapter(recyclerDisplayFragment.getAdapter())
     }
 
-    override fun openDetailsFragment(item: GitRetrofitItem) {
+    override fun openDetailsFragment(item: GitRetrofitUserRepo) {
         val fragment = DisplayItemFragment.getInstance(item)
 
         Log.d("TAG_X", "odf")
