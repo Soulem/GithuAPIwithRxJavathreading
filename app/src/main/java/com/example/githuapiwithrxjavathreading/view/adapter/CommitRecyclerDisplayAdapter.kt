@@ -4,10 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githuapiwithrxjavathreading.databinding.CardCommitItemLayoutBinding
-import com.example.githuapiwithrxjavathreading.databinding.CardUserItemLayoutBinding
 import com.example.githuapiwithrxjavathreading.model.data.github.commit.GitRetrofitUserCommitItem
 
-class CommitRecyclerDisplayAdapter(commitDelegate: GitAPICommitDelegate): RecyclerView.Adapter<CommitRecyclerDisplayAdapter.CommitCardItemHolder>() {
+class CommitRecyclerDisplayAdapter(private val commitDelegate: GitAPICommitDelegate): RecyclerView.Adapter<CommitRecyclerDisplayAdapter.CommitCardItemHolder>() {
     inner class CommitCardItemHolder(val binding: CardCommitItemLayoutBinding): RecyclerView.ViewHolder(binding.root)
 
     interface GitAPICommitDelegate{

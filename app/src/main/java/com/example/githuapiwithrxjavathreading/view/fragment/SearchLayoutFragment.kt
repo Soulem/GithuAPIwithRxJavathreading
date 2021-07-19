@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.githuapiwithrxjavathreading.databinding.FragmentSearchLayoutBinding
+import com.example.githuapiwithrxjavathreading.model.data.github.user.GitRetrofitUser
 import com.example.githuapiwithrxjavathreading.view.adapter.RepoRecyclerDisplayAdapter
+import com.example.githuapiwithrxjavathreading.view.adapter.UserRecyclerDisplayAdapter
 import com.example.githuapiwithrxjavathreading.viewmodel.ObjectViewModel
 
-class SearchLayoutFragment() : Fragment() {
+class SearchLayoutFragment() : Fragment(), UserRecyclerDisplayAdapter.GitAPIUserDelegate {
     private lateinit var binding: FragmentSearchLayoutBinding
     private lateinit var adapterRepo: RepoRecyclerDisplayAdapter
 
@@ -39,5 +41,9 @@ class SearchLayoutFragment() : Fragment() {
 
     fun setAdapter(adapterRepo: RepoRecyclerDisplayAdapter){
         this.adapterRepo = adapterRepo
+    }
+
+    override fun selectItem(gitRetrofitItemItem: GitRetrofitUser) {
+        TODO("Not yet implemented")
     }
 }

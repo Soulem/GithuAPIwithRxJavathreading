@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.githuapiwithrxjavathreading.R
+import com.example.githuapiwithrxjavathreading.model.data.github.repo.GitRetrofitUserRepoItem
+import com.example.githuapiwithrxjavathreading.view.adapter.RepoRecyclerDisplayAdapter
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,7 +19,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [UserDisplayFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class UserDisplayFragment : Fragment() {
+class UserDisplayFragment : Fragment(), RepoRecyclerDisplayAdapter.GitAPIRepoDelegate {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -56,5 +58,9 @@ class UserDisplayFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun selectItem(gitRetrofitItemItem: GitRetrofitUserRepoItem) {
+        TODO("Not yet implemented")
     }
 }

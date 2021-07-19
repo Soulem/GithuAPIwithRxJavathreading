@@ -3,11 +3,10 @@ package com.example.githuapiwithrxjavathreading.view.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.githuapiwithrxjavathreading.databinding.CardGitResultItemDisplayLayoutBinding
 import com.example.githuapiwithrxjavathreading.databinding.CardUserItemLayoutBinding
 import com.example.githuapiwithrxjavathreading.model.data.github.user.GitRetrofitUser
 
-class UserRecyclerDisplayAdapter(userDelegate : GitAPIUserDelegate): RecyclerView.Adapter<UserRecyclerDisplayAdapter.UserCardItemHolder>() {
+class UserRecyclerDisplayAdapter(private val userDelegate : GitAPIUserDelegate): RecyclerView.Adapter<UserRecyclerDisplayAdapter.UserCardItemHolder>() {
     inner class UserCardItemHolder(val binding: CardUserItemLayoutBinding): RecyclerView.ViewHolder(binding.root)
 
     interface GitAPIUserDelegate{
