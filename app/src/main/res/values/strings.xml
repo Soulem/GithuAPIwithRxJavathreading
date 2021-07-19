@@ -12,4 +12,5 @@
     <string name="commit_title_tv">Fragment Implementation</string>
     <string name="commit_description_tv">Iteration that added fragment layouts to the project in order to</string>
     <string name="file_name_default">File name or title</string>
+    <string name="default_repo_count">8</string>
 </resources>

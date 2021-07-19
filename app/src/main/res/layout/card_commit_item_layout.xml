@@ -32,19 +32,37 @@
             app:layout_constraintStart_toEndOf="@+id/commit_icon"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/user_icon_imageview"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/ic_user_icon"
+            app:layout_constraintEnd_toStartOf="@+id/user_name_textView"
+            app:layout_constraintStart_toStartOf="@+id/commit_title_textView"
+            app:layout_constraintTop_toBottomOf="@+id/commit_title_textView" />
+
         <TextView
-            android:id="@+id/commit_description_textView"
-            android:layout_width="240dp"
+            android:id="@+id/user_name_textView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:layout_marginRight="16dp"
-            android:text="Iteration that added fragment layouts to the project in order to "
+            android:text="@string/default_username"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/commit_title_textView"
+            app:layout_constraintStart_toStartOf="@+id/commit_title_textView"
+            app:layout_constraintTop_toBottomOf="@+id/commit_title_textView" />
+
+        <TextView
+            android:id="@+id/commit_date_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/repo_date_default"
             android:textColor="@color/black"
             android:textSize="12sp"
-            app:layout_constraintTop_toBottomOf="@id/commit_title_textView"
-            app:layout_constraintBottom_toTopOf="@+id/textView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/commit_icon" />
+            app:layout_constraintEnd_toEndOf="@+id/commit_title_textView"
+            app:layout_constraintStart_toEndOf="@+id/user_icon_imageview"
+            app:layout_constraintTop_toBottomOf="@+id/user_name_textView" />
+
 
         <TextView
             android:id="@+id/textView"
@@ -53,6 +71,7 @@
             android:layout_margin="8dp"
             android:background="@drawable/textview_border"
             android:text=" "
+            app:layout_constraintTop_toBottomOf="@id/commit_date_textView"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

@@ -33,7 +33,8 @@ class RepoRecyclerDisplayAdapter(private val repoDelegate: GitAPIRepoDelegate): 
         val item = apiList[position]
         holderRepo.binding.apply {
             this.repoNameTextView.text = item.name
-            this.repoNameTextView.setOnClickListener{
+            this.repoDateTextView.text = item.created_at
+            holderRepo.binding.root.setOnClickListener{
                 repoDelegate.selectItem(item)
             }
         }

@@ -29,8 +29,16 @@ class CommitRecyclerDisplayAdapter(private val commitDelegate: GitAPICommitDeleg
         return CommitCardItemHolder(binding);
     }
 
-    override fun onBindViewHolder(holder: CommitCardItemHolder, position: Int) {
-        TODO("Not yet implemented")
+    override fun onBindViewHolder(holderCommit: CommitCardItemHolder, position: Int) {
+        val item = apiList[position]
+        holderCommit.binding.apply {
+            this.commitTitleTextView.text = item.commit.message
+            this.userNameTextView.text = item.commit.author.name
+            this.commitDateTextView.text = item.commit.author.date
+            holderCommit.binding.root.setOnClickListener{
+                commitDelegate.selectItem(item)
+            }
+        }
     }
 
     override fun getItemCount(): Int = apiList.size
