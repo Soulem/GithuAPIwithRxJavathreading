@@ -79,17 +79,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/commit_title_textView" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/file_list_recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+    <ScrollView
         android:layout_marginTop="48dp"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#e7f3ff"
+        android:padding="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/commit_description_textView"
-        tools:listitem="@layout/card_file_item_layout" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/commit_description_textView">
+        <TextView
+            android:id="@+id/file_name_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/file_name_default"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            />
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
