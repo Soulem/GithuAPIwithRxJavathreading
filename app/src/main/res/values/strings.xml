@@ -10,4 +10,6 @@
     <string name="repo_date_default">07-20-2021</string>
     <string name="repo_link_default">https://github.com/Soulem/GithuAPIwithRxJavathreading</string>
     <string name="commit_title_tv">Fragment Implementation</string>
+    <string name="commit_description_tv">Iteration that added fragment layouts to the project in order to</string>
+    <string name="file_name_default">File name or title</string>
 </resources>
