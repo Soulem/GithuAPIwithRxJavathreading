@@ -1,6 +1,7 @@
 package com.example.githuapiwithrxjavathreading.network
 
-import com.example.githuapiwithrxjavathreading.model.data.github.repo.GitRetrofitUserRepo
+import com.example.githuapiwithrxjavathreading.model.data.github.commit.GitRetrofitUserCommitItem
+import com.example.githuapiwithrxjavathreading.model.data.github.repo.GitRetrofitUserRepoItem
 import com.example.githuapiwithrxjavathreading.model.data.github.user.GitRetrofitUser
 import com.example.githuapiwithrxjavathreading.utl.Constants.Companion.BASE_URL
 import com.example.githuapiwithrxjavathreading.utl.Constants.Companion.REPO_NAME
@@ -32,15 +33,19 @@ class GitAPIRetrofit @Inject constructor()  {
 
     fun getRepositoriesRemote(username : String) = gitAPIService.getUserRepositories(username)
 
+    fun getUsersRemote(username : String) = gitAPIService.getUserInfo(username)
+
+    fun getCommitsRemote(username : String, reponame : String) = gitAPIService.getUserCommits(username, reponame)
+
     interface GitAPIService{
         @GET(USER_REPOS_END_POINT)
-        fun getUserRepositories(@Path(USER_NAME) username : String) : Single<List<GitRetrofitUserRepo>>
+        fun getUserRepositories(@Path(USER_NAME) username : String) : Single<List<GitRetrofitUserRepoItem>>
 
         @GET(USER_END_POINT)
         fun getUserInfo(@Path(USER_NAME) username :String): Single<GitRetrofitUser>
 
         @GET(USER_COMMITS_END_POINT)
-        fun getUserCommits(@Path(USER_NAME) username :String, @Path(REPO_NAME) reponame :String)
+        fun getUserCommits(@Path(USER_NAME) username :String, @Path(REPO_NAME) reponame :String): Single<List<GitRetrofitUserCommitItem>>
 
 
     }

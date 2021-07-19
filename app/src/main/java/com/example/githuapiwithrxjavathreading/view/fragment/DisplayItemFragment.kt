@@ -6,19 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.githuapiwithrxjavathreading.databinding.FragmentDisplayItemBinding
-import com.example.githuapiwithrxjavathreading.model.data.github.repo.GitRetrofitUserRepo
+import com.example.githuapiwithrxjavathreading.model.data.github.repo.GitRetrofitUserRepoItem
 
 class DisplayItemFragment : Fragment() {
     companion object {
         lateinit var displayItemFragment: DisplayItemFragment
         const val RESULT_KEY = "RESULT_KEY"
-        fun getInstance(gitAPIRetrofitItem: GitRetrofitUserRepo): DisplayItemFragment{
+        fun getInstance(gitAPIRetrofitItemItem: GitRetrofitUserRepoItem): DisplayItemFragment{
             if(!this::displayItemFragment.isInitialized)// checking if lateinit property has been initialized
                 displayItemFragment = DisplayItemFragment()
 
             return displayItemFragment.also {
                 it.arguments = Bundle().also { bnd ->
-                    bnd.putParcelable(RESULT_KEY, gitAPIRetrofitItem)
+                    bnd.putParcelable(RESULT_KEY, gitAPIRetrofitItemItem)
                 }
             }
         }
@@ -42,7 +42,7 @@ class DisplayItemFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
 
-        arguments?.getParcelable<GitRetrofitUserRepo>(RESULT_KEY)?.let{
+        arguments?.getParcelable<GitRetrofitUserRepoItem>(RESULT_KEY)?.let{
             binding.gitRepoNameTextView.text = it.name
             binding.gitRepoUrlTextView.text = it.html_url
         }

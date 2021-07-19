@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.githuapiwithrxjavathreading.databinding.FragmentRecyclerDisplayLayoutBinding
-import com.example.githuapiwithrxjavathreading.model.data.github.repo.GitRetrofitUserRepo
+import com.example.githuapiwithrxjavathreading.model.data.github.repo.GitRetrofitUserRepoItem
 import com.example.githuapiwithrxjavathreading.utl.GitAPISelector
 import com.example.githuapiwithrxjavathreading.view.activity.MainActivity
 import com.example.githuapiwithrxjavathreading.view.adapter.RecyclerDisplayAdapter
@@ -39,13 +39,13 @@ class RecyclerDisplayFragment : Fragment(), RecyclerDisplayAdapter.GitAPIDelegat
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerViewDisplay.adapter = adapter
-        ObjectViewModel.instance.gitAPIData.observe(viewLifecycleOwner, {
+        ObjectViewModel.instance.gitRepoData.observe(viewLifecycleOwner, {
             adapter.apiList = it
         })
     }
 
-    override fun selectItem(gitRetrofitItem: GitRetrofitUserRepo) {
-        gitAPISelector.openDetailsFragment(gitRetrofitItem)
+    override fun selectItem(gitRetrofitItemItem: GitRetrofitUserRepoItem) {
+        gitAPISelector.openDetailsFragment(gitRetrofitItemItem)
     }
 
     fun getAdapter(): RecyclerDisplayAdapter = this.adapter

@@ -4,16 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githuapiwithrxjavathreading.databinding.CardGitResultItemDisplayLayoutBinding
-import com.example.githuapiwithrxjavathreading.model.data.github.repo.GitRetrofitUserRepo
+import com.example.githuapiwithrxjavathreading.model.data.github.repo.GitRetrofitUserRepoItem
 
 class RecyclerDisplayAdapter(private val delegate: GitAPIDelegate): RecyclerView.Adapter<RecyclerDisplayAdapter.CardItemHolder>() {
     inner class CardItemHolder(val binding: CardGitResultItemDisplayLayoutBinding): RecyclerView.ViewHolder(binding.root)
 
     interface GitAPIDelegate{
-        fun selectItem(gitRetrofitItem: GitRetrofitUserRepo)
+        fun selectItem(gitRetrofitItemItem: GitRetrofitUserRepoItem)
     }
 
-    var apiList : List<GitRetrofitUserRepo> = listOf()
+    var apiList : List<GitRetrofitUserRepoItem> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()

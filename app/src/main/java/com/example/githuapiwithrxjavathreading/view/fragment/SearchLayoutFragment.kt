@@ -31,7 +31,7 @@ class SearchLayoutFragment() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.searchUserButton.setOnClickListener{
             ObjectViewModel.instance.searchUser(binding.userNameEditText.text.toString())
-            ObjectViewModel.instance.gitAPIData.observe(viewLifecycleOwner, {
+            ObjectViewModel.instance.gitRepoData.observe(viewLifecycleOwner, {
                 adapter.apiList = it
             })
         }

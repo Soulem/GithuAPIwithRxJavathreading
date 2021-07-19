@@ -11,7 +11,7 @@ class Constants {
         const val USER_COMMITS_END_POINT = "repos/{$USER_NAME}/{$REPO_NAME}/commits"
 
         //Database
-        const val DATABASE_NAME = "GitHubUsers.db"
+        const val DATABASE_NAME = "GitUsersDB.db"
         const val DEFAULT_USERS = "Soulem"
     }
 }
