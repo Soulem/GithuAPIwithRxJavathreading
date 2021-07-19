@@ -6,12 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.githuapiwithrxjavathreading.databinding.FragmentSearchLayoutBinding
-import com.example.githuapiwithrxjavathreading.view.adapter.RecyclerDisplayAdapter
+import com.example.githuapiwithrxjavathreading.view.adapter.RepoRecyclerDisplayAdapter
 import com.example.githuapiwithrxjavathreading.viewmodel.ObjectViewModel
 
 class SearchLayoutFragment() : Fragment() {
     private lateinit var binding: FragmentSearchLayoutBinding
-    private lateinit var adapter: RecyclerDisplayAdapter
+    private lateinit var adapterRepo: RepoRecyclerDisplayAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,12 +32,12 @@ class SearchLayoutFragment() : Fragment() {
         binding.searchUserButton.setOnClickListener{
             ObjectViewModel.instance.searchUser(binding.userNameEditText.text.toString())
             ObjectViewModel.instance.gitRepoData.observe(viewLifecycleOwner, {
-                adapter.apiList = it
+                adapterRepo.apiList = it
             })
         }
     }
 
-    fun setAdapter(adapter: RecyclerDisplayAdapter){
-        this.adapter = adapter
+    fun setAdapter(adapterRepo: RepoRecyclerDisplayAdapter){
+        this.adapterRepo = adapterRepo
     }
 }

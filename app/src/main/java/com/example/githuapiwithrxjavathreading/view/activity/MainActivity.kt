@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity(), GitAPISelector {
         searchLayoutFragment.setAdapter(recyclerDisplayFragment.getAdapter())
     }
 
-    override fun openDetailsFragment(item: GitRetrofitUserRepoItem) {
+    override fun openRepoDetailsFragment(item: GitRetrofitUserRepoItem) {
         val fragment = DisplayItemFragment.getInstance(item)
 
         Log.d("TAG_X", "odf")

@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.githuapiwithrxjavathreading.databinding.CardGitResultItemDisplayLayoutBinding
 import com.example.githuapiwithrxjavathreading.model.data.github.repo.GitRetrofitUserRepoItem
 
-class RecyclerDisplayAdapter(private val delegate: GitAPIDelegate): RecyclerView.Adapter<RecyclerDisplayAdapter.CardItemHolder>() {
-    inner class CardItemHolder(val binding: CardGitResultItemDisplayLayoutBinding): RecyclerView.ViewHolder(binding.root)
+class RepoRecyclerDisplayAdapter(private val repoDelegate: GitAPIRepoDelegate): RecyclerView.Adapter<RepoRecyclerDisplayAdapter.RepoCardItemHolder>() {
+    inner class RepoCardItemHolder(val binding: CardGitResultItemDisplayLayoutBinding): RecyclerView.ViewHolder(binding.root)
 
-    interface GitAPIDelegate{
+    interface GitAPIRepoDelegate{
         fun selectItem(gitRetrofitItemItem: GitRetrofitUserRepoItem)
     }
 
@@ -19,22 +19,22 @@ class RecyclerDisplayAdapter(private val delegate: GitAPIDelegate): RecyclerView
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardItemHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoCardItemHolder {
         val binding = CardGitResultItemDisplayLayoutBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
 
-        return CardItemHolder(binding);
+        return RepoCardItemHolder(binding);
     }
 
-    override fun onBindViewHolder(holder: CardItemHolder, position: Int) {
+    override fun onBindViewHolder(holderRepo: RepoCardItemHolder, position: Int) {
         val item = apiList[position]
-        holder.binding.apply {
+        holderRepo.binding.apply {
             this.repoNameTextView.text = item.name
             this.repoNameTextView.setOnClickListener{
-                delegate.selectItem(item)
+                repoDelegate.selectItem(item)
             }
         }
     }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".view.activity.MainActivity">
 
-    <FrameLayout
+   <FrameLayout
         android:elevation="10dp"
         android:id="@+id/detail_item_frame"
         android:layout_width="match_parent"
@@ -41,7 +41,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/search_frameLayout"
-        android:name="com.example.githuapiwithrxjavathreading.view.fragment.RecyclerDisplayFragment"
+        android:name="com.example.githuapiwithrxjavathreading.view.fragment.UserDisplayFragment"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

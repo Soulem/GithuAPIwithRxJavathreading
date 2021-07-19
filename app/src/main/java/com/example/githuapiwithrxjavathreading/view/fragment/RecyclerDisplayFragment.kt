@@ -10,13 +10,13 @@ import com.example.githuapiwithrxjavathreading.databinding.FragmentRecyclerDispl
 import com.example.githuapiwithrxjavathreading.model.data.github.repo.GitRetrofitUserRepoItem
 import com.example.githuapiwithrxjavathreading.utl.GitAPISelector
 import com.example.githuapiwithrxjavathreading.view.activity.MainActivity
-import com.example.githuapiwithrxjavathreading.view.adapter.RecyclerDisplayAdapter
+import com.example.githuapiwithrxjavathreading.view.adapter.RepoRecyclerDisplayAdapter
 import com.example.githuapiwithrxjavathreading.viewmodel.ObjectViewModel
 
-class RecyclerDisplayFragment : Fragment(), RecyclerDisplayAdapter.GitAPIDelegate {
+class RecyclerDisplayFragment : Fragment(), RepoRecyclerDisplayAdapter.GitAPIRepoDelegate {
     private lateinit var binding: FragmentRecyclerDisplayLayoutBinding
     private lateinit var gitAPISelector: GitAPISelector
-    private val adapter = RecyclerDisplayAdapter(this)
+    private val adapter = RepoRecyclerDisplayAdapter(this)
 
     override fun onAttach(context: Context){
         super.onAttach(context)
@@ -45,8 +45,8 @@ class RecyclerDisplayFragment : Fragment(), RecyclerDisplayAdapter.GitAPIDelegat
     }
 
     override fun selectItem(gitRetrofitItemItem: GitRetrofitUserRepoItem) {
-        gitAPISelector.openDetailsFragment(gitRetrofitItemItem)
+        gitAPISelector.openRepoDetailsFragment(gitRetrofitItemItem)
     }
 
-    fun getAdapter(): RecyclerDisplayAdapter = this.adapter
+    fun getAdapter(): RepoRecyclerDisplayAdapter = this.adapter
 }
