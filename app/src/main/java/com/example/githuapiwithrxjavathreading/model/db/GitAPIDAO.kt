@@ -11,6 +11,6 @@ interface GitAPIDAO {
     @Insert(onConflict = REPLACE)
     fun cacheData(data: GitAPIRepoCache)
 
-    @Query("SELECT * FROM gitAPI_cache WHERE name = :username")
+    @Query("SELECT * FROM gitRepo_cache WHERE name = :username")
     fun readFromCache(username: String): GitAPIRepoCache
 }

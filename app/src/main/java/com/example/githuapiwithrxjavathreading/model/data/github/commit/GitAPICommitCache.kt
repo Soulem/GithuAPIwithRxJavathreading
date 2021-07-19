@@ -1,11 +1,11 @@
-package com.example.githuapiwithrxjavathreading.model.data.github.repo
+package com.example.githuapiwithrxjavathreading.model.data.github.commit
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "gitRepo_cache")
-data class GitAPIRepoCache(
+@Entity(tableName = "gitCommit_cache")
+data class GitAPICommitCache(
     @PrimaryKey()
     @ColumnInfo(name="name")
     val uniqueName: String,
