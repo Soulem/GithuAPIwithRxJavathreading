@@ -13,35 +13,12 @@
         android:layout_height="match_parent"
         >
 
-        <androidx.viewpager.widget.ViewPager
+        <!--<androidx.viewpager.widget.ViewPager
             android:id="@+id/main_vp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            />
+            />-->
 
     </FrameLayout>
-
-    <fragment
-        android:id="@+id/search_frameLayout"
-        android:name="com.example.githuapiwithrxjavathreading.view.fragment.SearchLayoutFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintVertical_weight=".30"
-        app:layout_constraintBottom_toTopOf="@id/display_frameLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <fragment
-        android:id="@+id/display_frameLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintVertical_weight=".70"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_frameLayout"
-        android:name="com.example.githuapiwithrxjavathreading.view.fragment.UserDisplayFragment"
-        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

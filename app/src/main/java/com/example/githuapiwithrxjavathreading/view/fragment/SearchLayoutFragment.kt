@@ -13,17 +13,13 @@ import com.example.githuapiwithrxjavathreading.viewmodel.ObjectViewModel
 
 class SearchLayoutFragment() : Fragment(), UserRecyclerDisplayAdapter.GitAPIUserDelegate {
     companion object {
-        lateinit var userDisplayItemFragment: UserDisplayFragment
-        const val RESULT_KEY = "REPO_RESULT_KEY"
-        fun getInstance(gitAPIRetrofitItem: GitRetrofitUser): UserDisplayFragment{
-            if(!this::userDisplayItemFragment.isInitialized)// checking if lateinit property has been initialized
-                userDisplayItemFragment = UserDisplayFragment()
+        lateinit var searchDisplayItemFragment: SearchLayoutFragment
+        const val RESULT_KEY = "SEARCH_RESULT_KEY"
+        fun getInstance(): SearchLayoutFragment{
+            if(!this::searchDisplayItemFragment.isInitialized)// checking if lateinit property has been initialized
+                searchDisplayItemFragment = SearchLayoutFragment()
 
-            return userDisplayItemFragment.also {
-                it.arguments = Bundle().also { bnd ->
-                    bnd.putParcelable(RESULT_KEY, gitAPIRetrofitItem)
-                }
-            }
+            return searchDisplayItemFragment
         }
     }
 

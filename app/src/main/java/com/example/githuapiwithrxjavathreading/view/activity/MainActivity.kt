@@ -7,10 +7,13 @@ import androidx.multidex.MultiDex
 import com.example.githuapiwithrxjavathreading.R
 import com.example.githuapiwithrxjavathreading.databinding.ActivityMainBinding
 import com.example.githuapiwithrxjavathreading.model.data.github.repo.GitRetrofitUserRepoItem
+import com.example.githuapiwithrxjavathreading.model.data.github.user.GitRetrofitUser
 import com.example.githuapiwithrxjavathreading.utl.GitAPISelector
 import com.example.githuapiwithrxjavathreading.view.fragment.DisplayItemFragment
 import com.example.githuapiwithrxjavathreading.view.fragment.RecyclerDisplayFragment
 import com.example.githuapiwithrxjavathreading.view.fragment.SearchLayoutFragment
+import com.example.githuapiwithrxjavathreading.viewmodel.ObjectViewModel
+import kotlinx.android.parcel.RawValue
 
 class MainActivity : AppCompatActivity(), GitAPISelector {
     private lateinit var binding: ActivityMainBinding
@@ -26,9 +29,16 @@ class MainActivity : AppCompatActivity(), GitAPISelector {
         // binding.mainVp.adapter = hFA
 
         MultiDex.install(this)
-        recyclerDisplayFragment = supportFragmentManager.findFragmentById(R.id.display_frameLayout) as RecyclerDisplayFragment
-        searchLayoutFragment = supportFragmentManager.findFragmentById(R.id.search_frameLayout) as SearchLayoutFragment
+        //searchLayoutFragment = supportFragmentManager.findFragmentById(R.id.search_frameLayout) as SearchLayoutFragment
         //searchLayoutFragment.setAdapter(recyclerDisplayFragment.getAdapter())
+        //var user = ObjectViewModel.instance.gitRepoData.value?.get(0) as GitRetrofitUser
+        //if (user == null){
+        //}
+        val searchFragment = SearchLayoutFragment.getInstance()
+        supportFragmentManager.beginTransaction()
+            .add(R.id.detail_item_frame, searchFragment)
+            .addToBackStack(searchFragment.tag)
+            .commit()
     }
 
     override fun openRepoDetailsFragment(item: GitRetrofitUserRepoItem) {
