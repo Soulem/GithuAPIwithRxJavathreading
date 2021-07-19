@@ -12,13 +12,13 @@ class DisplayItemFragment : Fragment() {
     companion object {
         lateinit var displayItemFragment: DisplayItemFragment
         const val RESULT_KEY = "RESULT_KEY"
-        fun getInstance(gitAPIRetrofitItemItem: GitRetrofitUserRepoItem): DisplayItemFragment{
+        fun getInstance(gitAPIRetrofitItem: GitRetrofitUserRepoItem): DisplayItemFragment{
             if(!this::displayItemFragment.isInitialized)// checking if lateinit property has been initialized
                 displayItemFragment = DisplayItemFragment()
 
             return displayItemFragment.also {
                 it.arguments = Bundle().also { bnd ->
-                    bnd.putParcelable(RESULT_KEY, gitAPIRetrofitItemItem)
+                    bnd.putParcelable(RESULT_KEY, gitAPIRetrofitItem)
                 }
             }
         }

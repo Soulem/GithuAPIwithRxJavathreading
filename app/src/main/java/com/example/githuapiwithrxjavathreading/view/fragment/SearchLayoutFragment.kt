@@ -7,13 +7,29 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.githuapiwithrxjavathreading.databinding.FragmentSearchLayoutBinding
 import com.example.githuapiwithrxjavathreading.model.data.github.user.GitRetrofitUser
-import com.example.githuapiwithrxjavathreading.view.adapter.RepoRecyclerDisplayAdapter
+import com.example.githuapiwithrxjavathreading.utl.GitAPISelector
 import com.example.githuapiwithrxjavathreading.view.adapter.UserRecyclerDisplayAdapter
 import com.example.githuapiwithrxjavathreading.viewmodel.ObjectViewModel
 
 class SearchLayoutFragment() : Fragment(), UserRecyclerDisplayAdapter.GitAPIUserDelegate {
+    companion object {
+        lateinit var userDisplayItemFragment: UserDisplayFragment
+        const val RESULT_KEY = "REPO_RESULT_KEY"
+        fun getInstance(gitAPIRetrofitItem: GitRetrofitUser): UserDisplayFragment{
+            if(!this::userDisplayItemFragment.isInitialized)// checking if lateinit property has been initialized
+                userDisplayItemFragment = UserDisplayFragment()
+
+            return userDisplayItemFragment.also {
+                it.arguments = Bundle().also { bnd ->
+                    bnd.putParcelable(RESULT_KEY, gitAPIRetrofitItem)
+                }
+            }
+        }
+    }
+
     private lateinit var binding: FragmentSearchLayoutBinding
-    private lateinit var adapterRepo: RepoRecyclerDisplayAdapter
+    private lateinit var adapter: UserRecyclerDisplayAdapter
+    private lateinit var gitAPISelector: GitAPISelector
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,14 +49,14 @@ class SearchLayoutFragment() : Fragment(), UserRecyclerDisplayAdapter.GitAPIUser
         super.onViewCreated(view, savedInstanceState)
         binding.searchUserButton.setOnClickListener{
             ObjectViewModel.instance.searchUser(binding.userNameEditText.text.toString())
-            ObjectViewModel.instance.gitRepoData.observe(viewLifecycleOwner, {
-                adapterRepo.apiList = it
+            ObjectViewModel.instance.gitUserData.observe(viewLifecycleOwner, {
+                adapter.apiList = it
             })
         }
     }
 
-    fun setAdapter(adapterRepo: RepoRecyclerDisplayAdapter){
-        this.adapterRepo = adapterRepo
+    fun setAdapter(adapterRepo: UserRecyclerDisplayAdapter){
+        this.adapter = adapterRepo
     }
 
     override fun selectItem(gitRetrofitItemItem: GitRetrofitUser) {

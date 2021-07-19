@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity(), GitAPISelector {
         MultiDex.install(this)
         recyclerDisplayFragment = supportFragmentManager.findFragmentById(R.id.display_frameLayout) as RecyclerDisplayFragment
         searchLayoutFragment = supportFragmentManager.findFragmentById(R.id.search_frameLayout) as SearchLayoutFragment
-        searchLayoutFragment.setAdapter(recyclerDisplayFragment.getAdapter())
+        //searchLayoutFragment.setAdapter(recyclerDisplayFragment.getAdapter())
     }
 
     override fun openRepoDetailsFragment(item: GitRetrofitUserRepoItem) {
