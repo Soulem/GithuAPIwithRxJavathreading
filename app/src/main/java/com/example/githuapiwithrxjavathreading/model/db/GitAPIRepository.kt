@@ -16,7 +16,9 @@ import javax.inject.Singleton
 class GitAPIRepository  @Inject constructor(private val gitAPIRetrofit : GitAPIRetrofit){
     fun readRepoFromRemoteSource(username : String) : Single<List<GitRetrofitUserRepoItem>> = gitAPIRetrofit.getRepositoriesRemote(username)
 
-    fun readUserFromRemoteSource(username :String): Single<GitRetrofitUser> = gitAPIRetrofit.getUsersRemote(username)
+    fun readUserFromRemoteSource(username :String): Single<GitRetrofitUser> = gitAPIRetrofit.getUserRemote(username)
+
+    fun readUsersFromRemoteSource(): Single<List<GitRetrofitUser>> = gitAPIRetrofit.getUsersRemote()
 
     fun readCommitsFromRemoteSource(username : String, reponame : String) : Single<List<GitRetrofitUserCommitItem>> = gitAPIRetrofit.getCommitsRemote(username, reponame)
 
@@ -33,7 +35,7 @@ class GitAPIRepository  @Inject constructor(private val gitAPIRetrofit : GitAPIR
 
     fun readUserFromCache(): List<GitRetrofitUser> {
         val cache = getDao().readUserFromCache()
-        val list : MutableList<GitRetrofitUser> = emptyList<GitRetrofitUser>() as MutableList<GitRetrofitUser>
+        val list = mutableListOf<GitRetrofitUser>()
         for (user : GitAPIUserCache in cache){
             list.add(Gson().fromJson(user.data, GitRetrofitUser::class.java))
         }
@@ -49,6 +51,12 @@ class GitAPIRepository  @Inject constructor(private val gitAPIRetrofit : GitAPIR
         val json = Gson().toJson(response)
         // userName = response[0].owner.login
         getDao().cacheRepoData((GitAPIRepoCache(response.login, json)))
+    }
+
+    fun saveUserToCache(response: List<GitRetrofitUser>){
+        val json = Gson().toJson(response)
+        // userName = response[0].owner.login
+        getDao().cacheRepoData((GitAPIRepoCache(response[0].login, json)))
     }
 
     fun readCommitsFromCache(userName : String): List<GitRetrofitUserCommitItem> {

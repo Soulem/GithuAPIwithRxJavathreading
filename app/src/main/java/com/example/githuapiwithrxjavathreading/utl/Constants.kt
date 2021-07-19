@@ -8,10 +8,11 @@ class Constants {
         const val REPO_NAME = "repo_name"
         const val USER_REPOS_END_POINT = "users/{$USER_NAME}/repos"
         const val USER_END_POINT = "users/{$USER_NAME}"
+        const val USERS_END_POINT = "users"
         const val USER_COMMITS_END_POINT = "repos/{$USER_NAME}/{$REPO_NAME}/commits"
 
         //Database
-        const val DATABASE_NAME = "GitUsersDB.db"
+        const val DATABASE_NAME = "GitUsersDatabase.db"
         const val DEFAULT_USERS = "Soulem"
     }
 }

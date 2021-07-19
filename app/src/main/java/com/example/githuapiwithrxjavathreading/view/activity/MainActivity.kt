@@ -25,8 +25,7 @@ class MainActivity : AppCompatActivity(), GitAPISelector {
         setContentView(binding.root)
 
         MultiDex.install(this)
-        
-        // This is where i create the SearchLayoutFragment to display
+         //This is where i create the SearchLayoutFragment to display
         val searchFragment = SearchLayoutFragment.getInstance()
         supportFragmentManager.beginTransaction()
             .add(R.id.detail_item_frame, searchFragment)

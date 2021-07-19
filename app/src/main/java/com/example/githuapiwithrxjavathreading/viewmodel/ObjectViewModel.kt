@@ -47,7 +47,7 @@ class ObjectViewModel: ViewModel() {
         )
 
         compDisposable.add(
-            gitAPIComponent.getComponentRepository().readUserFromRemoteSource("Soulem")
+            gitAPIComponent.getComponentRepository().readUsersFromRemoteSource()
                 .observeOn(Schedulers.io())
                 .subscribeOn(Schedulers.io())
                 .map {
@@ -58,7 +58,7 @@ class ObjectViewModel: ViewModel() {
                 }
                 .subscribe({results ->
                     Log.d("TAG_X", "update LiveData on ${Thread.currentThread().name}")
-                    val list :List<GitRetrofitUser> = listOf(results)
+                    val list :List<GitRetrofitUser> = results
                     gitUserData.postValue(list)
 
                 },  {throwable ->
@@ -100,8 +100,6 @@ class ObjectViewModel: ViewModel() {
     }
 
     fun searchUser(userName : String){
-        if (userName == "")
-            return
         compDisposable.add(
             gitAPIComponent.getComponentRepository().readUserFromRemoteSource(userName)
                 .observeOn(Schedulers.io())
@@ -115,6 +113,32 @@ class ObjectViewModel: ViewModel() {
                 .subscribe({results ->
                     Log.d("TAG_X", "update LiveData on ${Thread.currentThread().name}")
                     val list :List<GitRetrofitUser> = listOf(results)
+                    gitUserData.postValue(list)
+
+                },  {throwable ->
+                    Log.d("TAG_X", "Oops: ${throwable.localizedMessage}")
+                    val list = gitAPIComponent.getComponentRepository().readUserFromCache()
+                    gitUserData.postValue(list)
+                })
+            //high order function - function that can take
+            //other functions as arguments or have a function as a return type
+        )
+    }
+
+    fun searchUser(){
+        compDisposable.add(
+            gitAPIComponent.getComponentRepository().readUsersFromRemoteSource()
+                .observeOn(Schedulers.io())
+                .subscribeOn(Schedulers.io())
+                .map {
+
+                    gitAPIComponent.getComponentRepository().saveUserToCache(it)
+                    Log.d("TAG_X", "saving to cache - on ${Thread.currentThread().name}")
+                    it
+                }
+                .subscribe({results ->
+                    Log.d("TAG_X", "update LiveData on ${Thread.currentThread().name}")
+                    val list :List<GitRetrofitUser> = results
                     gitUserData.postValue(list)
 
                 },  {throwable ->

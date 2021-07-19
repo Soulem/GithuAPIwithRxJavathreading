@@ -24,7 +24,7 @@ class SearchLayoutFragment() : Fragment(), UserRecyclerDisplayAdapter.GitAPIUser
     }
 
     private lateinit var binding: FragmentSearchLayoutBinding
-    private lateinit var adapter: UserRecyclerDisplayAdapter
+    private val adapter = UserRecyclerDisplayAdapter(this)
     private lateinit var gitAPISelector: GitAPISelector
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +37,12 @@ class SearchLayoutFragment() : Fragment(), UserRecyclerDisplayAdapter.GitAPIUser
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSearchLayoutBinding.inflate(layoutInflater)
+        binding.userListRecyclerview.adapter = adapter
+        ObjectViewModel.instance.searchUser()
+        ObjectViewModel.instance.gitUserData.observe(viewLifecycleOwner, {
+            adapter.apiList = it
+        })
+
         // Inflate the layout for this fragment
         return binding.root
     }
@@ -49,10 +55,6 @@ class SearchLayoutFragment() : Fragment(), UserRecyclerDisplayAdapter.GitAPIUser
                 adapter.apiList = it
             })
         }
-    }
-
-    fun setAdapter(adapterRepo: UserRecyclerDisplayAdapter){
-        this.adapter = adapterRepo
     }
 
     override fun selectItem(gitRetrofitItemItem: GitRetrofitUser) {
