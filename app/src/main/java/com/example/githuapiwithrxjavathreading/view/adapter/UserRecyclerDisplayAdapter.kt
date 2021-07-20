@@ -35,7 +35,7 @@ class UserRecyclerDisplayAdapter(private val userDelegate : GitAPIUserDelegate):
         val item = apiList[position]
         holderUser.binding.apply {
             this.userNameTv.text = item.login
-            this.repoCountTv.text = item.id.toString()
+            this.userIdTv.text = item.id.toString()
             Glide.with(holderUser.binding.root)
                 .applyDefaultRequestOptions(RequestOptions().circleCrop())
                 .load(item.avatar_url)
