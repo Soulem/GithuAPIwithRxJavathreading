@@ -27,6 +27,10 @@ class SearchLayoutFragment() : Fragment(), UserRecyclerDisplayAdapter.GitAPIUser
     private val adapter = UserRecyclerDisplayAdapter(this)
     private lateinit var gitAPISelector: GitAPISelector
 
+    fun setSelector(gitAPISelector : GitAPISelector){
+        this.gitAPISelector = gitAPISelector
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -39,7 +43,7 @@ class SearchLayoutFragment() : Fragment(), UserRecyclerDisplayAdapter.GitAPIUser
         binding = FragmentSearchLayoutBinding.inflate(layoutInflater)
         binding.userListRecyclerview.adapter = adapter
         ObjectViewModel.instance.searchUser()
-        ObjectViewModel.instance.gitUserData.observe(viewLifecycleOwner, {
+        ObjectViewModel.instance.gitUsersData.observe(viewLifecycleOwner, {
             adapter.apiList = it
         })
 
@@ -51,13 +55,13 @@ class SearchLayoutFragment() : Fragment(), UserRecyclerDisplayAdapter.GitAPIUser
         super.onViewCreated(view, savedInstanceState)
         binding.searchUserButton.setOnClickListener{
             ObjectViewModel.instance.searchUser(binding.userNameEditText.text.toString())
-            ObjectViewModel.instance.gitUserData.observe(viewLifecycleOwner, {
+            ObjectViewModel.instance.gitUsersData.observe(viewLifecycleOwner, {
                 adapter.apiList = it
             })
         }
     }
 
-    override fun selectItem(gitRetrofitItemItem: GitRetrofitUser) {
-        TODO("Not yet implemented")
+    override fun selectItem(gitRetrofitItem: GitRetrofitUser) {
+        gitAPISelector.openRepoDetailsFragment(gitRetrofitItem)
     }
 }

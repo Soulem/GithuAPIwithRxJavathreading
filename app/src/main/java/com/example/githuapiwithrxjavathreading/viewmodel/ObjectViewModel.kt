@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import com.example.githuapiwithrxjavathreading.model.data.github.commit.GitRetrofitUserCommitItem
 import com.example.githuapiwithrxjavathreading.model.data.github.repo.GitRetrofitUserRepoItem
 import com.example.githuapiwithrxjavathreading.model.data.github.user.GitRetrofitUser
-import com.example.githuapiwithrxjavathreading.network.GitAPIRetrofit
 import com.example.githuapiwithrxjavathreading.utl.Constants.Companion.DEFAULT_USERS
 import com.example.githuapiwithrxjavathreading.utl.GitAPISingleton.Companion.gitAPIComponent
 import io.reactivex.disposables.CompositeDisposable
@@ -18,8 +17,9 @@ class ObjectViewModel: ViewModel() {
     }
 
     val gitRepoData = MutableLiveData<List<GitRetrofitUserRepoItem>>()
-    val gitUserData = MutableLiveData<List<GitRetrofitUser>>()
+    val gitUsersData = MutableLiveData<List<GitRetrofitUser>>()
     val gitCommitData = MutableLiveData<List<GitRetrofitUserCommitItem>>()
+    val gitUserData = MutableLiveData<GitRetrofitUser>()
     private val compDisposable = CompositeDisposable()
 
     init {
@@ -59,12 +59,12 @@ class ObjectViewModel: ViewModel() {
                 .subscribe({results ->
                     Log.d("TAG_X", "update LiveData on ${Thread.currentThread().name}")
                     val list :List<GitRetrofitUser> = results
-                    gitUserData.postValue(list)
+                    gitUsersData.postValue(list)
 
                 },  {throwable ->
                     Log.d("TAG_X", "Oops: ${throwable.localizedMessage}")
                     val list = gitAPIComponent.getComponentRepository().readUserFromCache()
-                    gitUserData.postValue(list)
+                    gitUsersData.postValue(list)
                 })
             //high order function - function that can take
             //other functions as arguments or have a function as a return type
@@ -112,13 +112,12 @@ class ObjectViewModel: ViewModel() {
                 }
                 .subscribe({results ->
                     Log.d("TAG_X", "update LiveData on ${Thread.currentThread().name}")
-                    val list :List<GitRetrofitUser> = listOf(results)
-                    gitUserData.postValue(list)
+                    gitUserData.postValue(results)
 
                 },  {throwable ->
                     Log.d("TAG_X", "Oops: ${throwable.localizedMessage}")
                     val list = gitAPIComponent.getComponentRepository().readUserFromCache()
-                    gitUserData.postValue(list)
+                    gitUserData.postValue(list[0])
                 })
             //high order function - function that can take
             //other functions as arguments or have a function as a return type
@@ -139,12 +138,12 @@ class ObjectViewModel: ViewModel() {
                 .subscribe({results ->
                     Log.d("TAG_X", "update LiveData on ${Thread.currentThread().name}")
                     val list :List<GitRetrofitUser> = results
-                    gitUserData.postValue(list)
+                    gitUsersData.postValue(list)
 
                 },  {throwable ->
                     Log.d("TAG_X", "Oops: ${throwable.localizedMessage}")
                     val list = gitAPIComponent.getComponentRepository().readUserFromCache()
-                    gitUserData.postValue(list)
+                    gitUsersData.postValue(list)
                 })
             //high order function - function that can take
             //other functions as arguments or have a function as a return type

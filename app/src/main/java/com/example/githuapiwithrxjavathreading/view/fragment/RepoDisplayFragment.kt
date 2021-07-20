@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.githuapiwithrxjavathreading.databinding.FragmentCommitDisplayBinding
+import com.example.githuapiwithrxjavathreading.databinding.FragmentRepoDisplayBinding
 import com.example.githuapiwithrxjavathreading.model.data.github.commit.GitRetrofitUserCommitItem
 import com.example.githuapiwithrxjavathreading.model.data.github.repo.GitRetrofitUserRepoItem
 import com.example.githuapiwithrxjavathreading.utl.GitAPISelector
@@ -16,19 +17,14 @@ class RepoDisplayFragment : Fragment(), CommitRecyclerDisplayAdapter.GitAPICommi
     companion object {
         lateinit var repoDisplayItemFragment: RepoDisplayFragment
         const val RESULT_KEY = "REPO_RESULT_KEY"
-        fun getInstance(gitAPIRetrofitItem: GitRetrofitUserRepoItem): RepoDisplayFragment{
+        fun getInstance(): RepoDisplayFragment{
             if(!this::repoDisplayItemFragment.isInitialized)// checking if lateinit property has been initialized
                 repoDisplayItemFragment = RepoDisplayFragment()
-
-            return repoDisplayItemFragment.also {
-                it.arguments = Bundle().also { bnd ->
-                    bnd.putParcelable(RESULT_KEY, gitAPIRetrofitItem)
-                }
-            }
+            return repoDisplayItemFragment
         }
     }
 
-    private lateinit var binding: FragmentCommitDisplayBinding
+    private lateinit var binding: FragmentRepoDisplayBinding
     private lateinit var gitAPISelector: GitAPISelector
     private val adapter = CommitRecyclerDisplayAdapter(this)
 
@@ -40,7 +36,7 @@ class RepoDisplayFragment : Fragment(), CommitRecyclerDisplayAdapter.GitAPICommi
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentCommitDisplayBinding.inflate(inflater, container, false)
+        binding = FragmentRepoDisplayBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
         return binding.root
     }

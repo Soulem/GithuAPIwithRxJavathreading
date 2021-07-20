@@ -45,7 +45,7 @@ class RecyclerDisplayFragment : Fragment(), RepoRecyclerDisplayAdapter.GitAPIRep
     }
 
     override fun selectItem(gitRetrofitItemItem: GitRetrofitUserRepoItem) {
-        gitAPISelector.openRepoDetailsFragment(gitRetrofitItemItem)
+        //gitAPISelector.openRepoDetailsFragment(gitRetrofitItemItem)
     }
 
     fun getAdapter(): RepoRecyclerDisplayAdapter = this.adapter
