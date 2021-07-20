@@ -24,7 +24,10 @@ class GitAPIRepository  @Inject constructor(private val gitAPIRetrofit : GitAPIR
 
     fun readReposFromCache(userName : String): List<GitRetrofitUserRepoItem> {
         val cache = getDao().readRepoFromCache(userName)
-        return listOf(Gson().fromJson(cache.data, GitRetrofitUserRepoItem::class.java))
+        return if (cache == null)
+            emptyList();
+        else
+            listOf(Gson().fromJson(cache.data, GitRetrofitUserRepoItem::class.java))
     }
 
     fun saveReposToCache(response: List<GitRetrofitUserRepoItem>){
@@ -61,7 +64,10 @@ class GitAPIRepository  @Inject constructor(private val gitAPIRetrofit : GitAPIR
 
     fun readCommitsFromCache(userName : String): List<GitRetrofitUserCommitItem> {
         val cache = getDao().readCommitFromCache(userName)
-        return listOf(Gson().fromJson(cache.data, GitRetrofitUserCommitItem::class.java))
+        return if (cache == null)
+            emptyList();
+        else
+            listOf(Gson().fromJson(cache.data, GitRetrofitUserCommitItem::class.java))
     }
 
     fun saveCommitsToCache(response: List<GitRetrofitUserCommitItem>){
