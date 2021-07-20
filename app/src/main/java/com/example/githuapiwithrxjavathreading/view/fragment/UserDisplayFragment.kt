@@ -15,22 +15,28 @@ import com.example.githuapiwithrxjavathreading.utl.GitAPISelector
 import com.example.githuapiwithrxjavathreading.view.adapter.RepoRecyclerDisplayAdapter
 import com.example.githuapiwithrxjavathreading.viewmodel.ObjectViewModel
 
-class UserDisplayFragment : Fragment(), RepoRecyclerDisplayAdapter.GitAPIRepoDelegate {
+class UserDisplayFragment() : Fragment(), RepoRecyclerDisplayAdapter.GitAPIRepoDelegate {
     companion object {
         lateinit var userDisplayItemFragment: UserDisplayFragment
-        fun getInstance(): UserDisplayFragment{
+        fun getInstance(gitAPISelector: GitAPISelector, gitUserItem : GitRetrofitUser): UserDisplayFragment{
             if(!this::userDisplayItemFragment.isInitialized)// checking if lateinit property has been initialized
                 userDisplayItemFragment = UserDisplayFragment()
-
+            userDisplayItemFragment.setSelector(gitAPISelector)
+            userDisplayItemFragment.setGitUserItem(gitUserItem)
             return userDisplayItemFragment
         }
     }
 
     private lateinit var binding: FragmentUserDisplayBinding
-    private lateinit var gitAPISelector: GitAPISelector
     private val adapter = RepoRecyclerDisplayAdapter(this)
+    private lateinit var gitAPISelector : GitAPISelector
+    private lateinit var gitUserItem : GitRetrofitUser
 
-    fun setSelector (gitAPISelector: GitAPISelector){
+    fun setGitUserItem(gitUserItem : GitRetrofitUser){
+        this.gitUserItem = gitUserItem
+    }
+
+     fun setSelector(gitAPISelector: GitAPISelector){
         this.gitAPISelector = gitAPISelector
     }
 
@@ -44,6 +50,7 @@ class UserDisplayFragment : Fragment(), RepoRecyclerDisplayAdapter.GitAPIRepoDel
     ): View? {
         binding = FragmentUserDisplayBinding.inflate(inflater, container, false)
         binding.userListRecyclerview.adapter = adapter
+        ObjectViewModel.instance.searchRepos(gitUserItem.login)
         ObjectViewModel.instance.gitRepoData.observe(viewLifecycleOwner, {
             adapter.apiList = it
             Glide.with(binding.root)
@@ -67,7 +74,7 @@ class UserDisplayFragment : Fragment(), RepoRecyclerDisplayAdapter.GitAPIRepoDel
         }*/
     }
 
-    override fun selectItem(gitRetrofitItemItem: GitRetrofitUserRepoItem) {
-        TODO("Not yet implemented")
+    override fun selectItem(gitRetrofitItem: GitRetrofitUserRepoItem) {
+        gitAPISelector.openRepoDetailsFragment(gitRetrofitItem)
     }
 }

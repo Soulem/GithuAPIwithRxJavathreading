@@ -15,19 +15,19 @@ class SearchLayoutFragment() : Fragment(), UserRecyclerDisplayAdapter.GitAPIUser
     companion object {
         lateinit var searchDisplayItemFragment: SearchLayoutFragment
         const val RESULT_KEY = "SEARCH_RESULT_KEY"
-        fun getInstance(): SearchLayoutFragment{
+        fun getInstance(gitAPISelector: GitAPISelector): SearchLayoutFragment{
             if(!this::searchDisplayItemFragment.isInitialized)// checking if lateinit property has been initialized
                 searchDisplayItemFragment = SearchLayoutFragment()
-
+            searchDisplayItemFragment.setSelector(gitAPISelector)
             return searchDisplayItemFragment
         }
     }
 
     private lateinit var binding: FragmentSearchLayoutBinding
     private val adapter = UserRecyclerDisplayAdapter(this)
-    private lateinit var gitAPISelector: GitAPISelector
+    private lateinit var gitAPISelector : GitAPISelector
 
-    fun setSelector(gitAPISelector : GitAPISelector){
+    fun setSelector(gitAPISelector: GitAPISelector){
         this.gitAPISelector = gitAPISelector
     }
 
@@ -54,14 +54,15 @@ class SearchLayoutFragment() : Fragment(), UserRecyclerDisplayAdapter.GitAPIUser
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.searchUserButton.setOnClickListener{
-            ObjectViewModel.instance.searchUser(binding.userNameEditText.text.toString())
-            ObjectViewModel.instance.gitUsersData.observe(viewLifecycleOwner, {
-                adapter.apiList = it
+            val name : String = binding.userNameEditText.text.toString()
+            ObjectViewModel.instance.searchUser(name)
+            ObjectViewModel.instance.gitUserData.observe(viewLifecycleOwner, {
+                adapter.apiList = listOf(it)
             })
         }
     }
 
     override fun selectItem(gitRetrofitItem: GitRetrofitUser) {
-        gitAPISelector.openRepoDetailsFragment(gitRetrofitItem)
+        gitAPISelector.openUserDetailsFragment(gitRetrofitItem)
     }
 }
