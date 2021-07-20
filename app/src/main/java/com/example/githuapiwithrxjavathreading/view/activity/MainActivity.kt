@@ -11,13 +11,9 @@ import com.example.githuapiwithrxjavathreading.model.data.github.repo.GitRetrofi
 import com.example.githuapiwithrxjavathreading.model.data.github.user.GitRetrofitUser
 import com.example.githuapiwithrxjavathreading.utl.GitAPISelector
 import com.example.githuapiwithrxjavathreading.view.fragment.*
-import com.example.githuapiwithrxjavathreading.viewmodel.ObjectViewModel
 
 class MainActivity : AppCompatActivity(), GitAPISelector {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var deprecatedRecyclerDisplayFragment : DeprecatedRecyclerDisplayFragment
-    private lateinit var searchLayoutFragment : SearchLayoutFragment
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,8 +44,6 @@ class MainActivity : AppCompatActivity(), GitAPISelector {
 
     override fun openRepoDetailsFragment(gitRetrofitItem: GitRetrofitUserRepoItem) {
         val fragment = RepoDisplayFragment.getInstance(this, gitRetrofitItem)
-
-        ObjectViewModel.instance.searchCommits(gitRetrofitItem.owner.login, gitRetrofitItem.name)
 
         supportFragmentManager.beginTransaction()
             .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right, android.R.anim.slide_in_left, android.R.anim.slide_out_right)

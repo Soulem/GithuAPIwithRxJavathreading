@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.githuapiwithrxjavathreading.databinding.FragmentRecyclerDisplayLayoutBinding
+import com.example.githuapiwithrxjavathreading.databinding.DeprecatedFragmentRecyclerDisplayLayoutBinding
 import com.example.githuapiwithrxjavathreading.model.data.github.repo.GitRetrofitUserRepoItem
 import com.example.githuapiwithrxjavathreading.utl.GitAPISelector
 import com.example.githuapiwithrxjavathreading.view.activity.MainActivity
@@ -14,7 +14,7 @@ import com.example.githuapiwithrxjavathreading.view.adapter.RepoRecyclerDisplayA
 import com.example.githuapiwithrxjavathreading.viewmodel.ObjectViewModel
 
 class DeprecatedRecyclerDisplayFragment : Fragment(), RepoRecyclerDisplayAdapter.GitAPIRepoDelegate {
-    private lateinit var binding: FragmentRecyclerDisplayLayoutBinding
+    private lateinit var binding: DeprecatedFragmentRecyclerDisplayLayoutBinding
     private lateinit var gitAPISelector: GitAPISelector
     private val adapter = RepoRecyclerDisplayAdapter(this)
 
@@ -31,7 +31,7 @@ class DeprecatedRecyclerDisplayFragment : Fragment(), RepoRecyclerDisplayAdapter
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentRecyclerDisplayLayoutBinding.inflate(layoutInflater)
+        binding = DeprecatedFragmentRecyclerDisplayLayoutBinding.inflate(layoutInflater)
         // Inflate the layout for this fragment
         return binding.root
     }

@@ -50,6 +50,7 @@ class RepoDisplayFragment() : Fragment(), CommitRecyclerDisplayAdapter.GitAPICom
     ): View? {
         binding = FragmentRepoDisplayBinding.inflate(inflater, container, false)
         binding.commitListRecyclerview.adapter = adapter
+        ObjectViewModel.instance.searchCommits(gitRepoItem.owner.login, gitRepoItem.name)
         ObjectViewModel.instance.gitCommitData.observe(viewLifecycleOwner, {
             adapter.apiList = it
 
