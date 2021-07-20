@@ -23,8 +23,10 @@ class MainActivity : AppCompatActivity(), GitAPISelector {
         setContentView(binding.root)
 
         MultiDex.install(this)
+
          //This is where i create the SearchLayoutFragment to display
         val searchFragment = SearchLayoutFragment.getInstance()
+
         searchFragment.setSelector(this)
         supportFragmentManager.beginTransaction()
             .add(R.id.detail_item_frame, searchFragment)
@@ -33,16 +35,15 @@ class MainActivity : AppCompatActivity(), GitAPISelector {
     }
 
     override fun openRepoDetailsFragment(item: GitRetrofitUser) {
+        val fragment = UserDisplayFragment.getInstance()
 
-        ObjectViewModel.instance.searchUser(item.login)
-        ObjectViewModel.instance.gitUsersData.observe(this, {
-            val fragment = UserDisplayFragment.getInstance(it[0])
-            Log.d("TAG_X", "odf")
-            supportFragmentManager.beginTransaction()
-                .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right, android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-                .replace(R.id.detail_item_frame, fragment)
-                .addToBackStack(fragment.tag)
-                .commit()
-        })
+        ObjectViewModel.instance.searchRepos(item.login)
+
+        Log.d("TAG_X", "odf")
+        supportFragmentManager.beginTransaction()
+            .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right, android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+            .replace(R.id.detail_item_frame, fragment)
+            .addToBackStack(fragment.tag)
+            .commit()
     }
 }

@@ -5,32 +5,34 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.githuapiwithrxjavathreading.databinding.FragmentCommitDisplayBinding
 import com.example.githuapiwithrxjavathreading.databinding.FragmentUserDisplayBinding
 import com.example.githuapiwithrxjavathreading.model.data.github.repo.GitRetrofitUserRepoItem
 import com.example.githuapiwithrxjavathreading.model.data.github.user.GitRetrofitUser
 import com.example.githuapiwithrxjavathreading.utl.GitAPISelector
 import com.example.githuapiwithrxjavathreading.view.adapter.RepoRecyclerDisplayAdapter
+import com.example.githuapiwithrxjavathreading.viewmodel.ObjectViewModel
 
 class UserDisplayFragment : Fragment(), RepoRecyclerDisplayAdapter.GitAPIRepoDelegate {
     companion object {
         lateinit var userDisplayItemFragment: UserDisplayFragment
-        const val RESULT_KEY = "REPO_RESULT_KEY"
-        fun getInstance(gitAPIRetrofitItem: GitRetrofitUser): UserDisplayFragment{
+        fun getInstance(): UserDisplayFragment{
             if(!this::userDisplayItemFragment.isInitialized)// checking if lateinit property has been initialized
                 userDisplayItemFragment = UserDisplayFragment()
 
-            return userDisplayItemFragment.also {
-                it.arguments = Bundle().also { bnd ->
-                    bnd.putParcelable(RESULT_KEY, gitAPIRetrofitItem)
-                }
-            }
+            return userDisplayItemFragment
         }
     }
 
     private lateinit var binding: FragmentUserDisplayBinding
     private lateinit var gitAPISelector: GitAPISelector
     private val adapter = RepoRecyclerDisplayAdapter(this)
+
+    fun setSelector (gitAPISelector: GitAPISelector){
+        this.gitAPISelector = gitAPISelector
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,8 +43,28 @@ class UserDisplayFragment : Fragment(), RepoRecyclerDisplayAdapter.GitAPIRepoDel
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentUserDisplayBinding.inflate(inflater, container, false)
+        binding.userListRecyclerview.adapter = adapter
+        ObjectViewModel.instance.gitRepoData.observe(viewLifecycleOwner, {
+            adapter.apiList = it
+            Glide.with(binding.root)
+                .applyDefaultRequestOptions(RequestOptions().circleCrop())
+                .load(it[0].owner.avatar_url)
+                .into(binding.userImageview)
+            binding.userNameTv.text = it[0].owner.login
+        })
+
         // Inflate the layout for this fragment
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        /*binding.searchUserButton.setOnClickListener{
+            ObjectViewModel.instance.searchUser(binding.userNameEditText.text.toString())
+            ObjectViewModel.instance.gitUsersData.observe(viewLifecycleOwner, {
+                adapter.apiList = it
+            })
+        }*/
     }
 
     override fun selectItem(gitRetrofitItemItem: GitRetrofitUserRepoItem) {
