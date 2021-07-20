@@ -13,14 +13,13 @@ interface GitAPIDAO {
     @Insert(onConflict = REPLACE)
     fun cacheRepoData(data: GitAPIRepoCache)
 
+    @Insert(onConflict = REPLACE)
+    fun cacheUserData(data: GitAPIUserCache)
 
     @Insert(onConflict = REPLACE)
-    fun cacheUserData(data: GitAPIRepoCache)
+    fun cacheCommitData(data: GitAPICommitCache)
 
-    @Insert(onConflict = REPLACE)
-    fun cacheCommitData(data: GitAPIRepoCache)
-
-    @Query("SELECT * FROM gitRepo_cache WHERE name = :username")
+    @Query("SELECT * FROM gitRepo_cache WHERE name = :username LIMIT 1")
     fun readRepoFromCache(username: String): GitAPIRepoCache
 
     @Query("SELECT * FROM gitUser_cache")
