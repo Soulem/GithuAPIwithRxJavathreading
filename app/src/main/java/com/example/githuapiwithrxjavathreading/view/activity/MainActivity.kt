@@ -15,7 +15,7 @@ import com.example.githuapiwithrxjavathreading.viewmodel.ObjectViewModel
 
 class MainActivity : AppCompatActivity(), GitAPISelector {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var recyclerDisplayFragment : RecyclerDisplayFragment
+    private lateinit var deprecatedRecyclerDisplayFragment : DeprecatedRecyclerDisplayFragment
     private lateinit var searchLayoutFragment : SearchLayoutFragment
 
 

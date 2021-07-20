@@ -13,7 +13,7 @@ import com.example.githuapiwithrxjavathreading.view.activity.MainActivity
 import com.example.githuapiwithrxjavathreading.view.adapter.RepoRecyclerDisplayAdapter
 import com.example.githuapiwithrxjavathreading.viewmodel.ObjectViewModel
 
-class RecyclerDisplayFragment : Fragment(), RepoRecyclerDisplayAdapter.GitAPIRepoDelegate {
+class DeprecatedRecyclerDisplayFragment : Fragment(), RepoRecyclerDisplayAdapter.GitAPIRepoDelegate {
     private lateinit var binding: FragmentRecyclerDisplayLayoutBinding
     private lateinit var gitAPISelector: GitAPISelector
     private val adapter = RepoRecyclerDisplayAdapter(this)

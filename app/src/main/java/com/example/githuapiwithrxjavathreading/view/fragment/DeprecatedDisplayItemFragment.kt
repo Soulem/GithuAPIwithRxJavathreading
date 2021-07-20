@@ -8,15 +8,15 @@ import android.view.ViewGroup
 import com.example.githuapiwithrxjavathreading.databinding.FragmentDisplayItemBinding
 import com.example.githuapiwithrxjavathreading.model.data.github.repo.GitRetrofitUserRepoItem
 
-class DisplayItemFragment : Fragment() {
+class DeprecatedDisplayItemFragment : Fragment() {
     companion object {
-        lateinit var displayItemFragment: DisplayItemFragment
+        lateinit var deprecatedDisplayItemFragment: DeprecatedDisplayItemFragment
         const val RESULT_KEY = "RESULT_KEY"
-        fun getInstance(gitAPIRetrofitItem: GitRetrofitUserRepoItem): DisplayItemFragment{
-            if(!this::displayItemFragment.isInitialized)// checking if lateinit property has been initialized
-                displayItemFragment = DisplayItemFragment()
+        fun getInstance(gitAPIRetrofitItem: GitRetrofitUserRepoItem): DeprecatedDisplayItemFragment{
+            if(!this::deprecatedDisplayItemFragment.isInitialized)// checking if lateinit property has been initialized
+                deprecatedDisplayItemFragment = DeprecatedDisplayItemFragment()
 
-            return displayItemFragment.also {
+            return deprecatedDisplayItemFragment.also {
                 it.arguments = Bundle().also { bnd ->
                     bnd.putParcelable(RESULT_KEY, gitAPIRetrofitItem)
                 }
