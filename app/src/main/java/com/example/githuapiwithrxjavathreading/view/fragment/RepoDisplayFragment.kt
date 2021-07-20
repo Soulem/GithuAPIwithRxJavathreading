@@ -54,11 +54,11 @@ class RepoDisplayFragment() : Fragment(), CommitRecyclerDisplayAdapter.GitAPICom
             adapter.apiList = it
 
             val tempString = it[0].commit.author.date
-            val newDate = tempString.subSequence(5, 6).toString() +"-"+ tempString.subSequence(8, 9).toString()+ "-"+tempString.subSequence(0, 3).toString()
+            val newDate = tempString.subSequence(5, 7).toString() +"-"+ tempString.subSequence(8, 10).toString()+ "-"+tempString.subSequence(0, 4).toString()
 
             binding.repoDateTv.text = newDate
             binding.repoLinkTv.text = gitRepoItem.html_url
-            binding.repoNameTv.text = gitRepoItem.owner.login
+            binding.repoNameTv.text = gitRepoItem.name
 
         })
         // Inflate the layout for this fragment

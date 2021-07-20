@@ -3,6 +3,8 @@ package com.example.githuapiwithrxjavathreading.view.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.githuapiwithrxjavathreading.databinding.CardCommitItemLayoutBinding
 import com.example.githuapiwithrxjavathreading.model.data.github.commit.GitRetrofitUserCommitItem
 
@@ -35,6 +37,10 @@ class CommitRecyclerDisplayAdapter(private val commitDelegate: GitAPICommitDeleg
             this.commitTitleTextView.text = item.commit.message
             this.userNameTextView.text = item.commit.author.name
             this.commitDateTextView.text = item.commit.author.date
+            Glide.with(this.root)
+                .applyDefaultRequestOptions(RequestOptions().circleCrop())
+                .load(item.author.avatar_url)
+                .into(this.userIconImageview)
             holderCommit.binding.root.setOnClickListener{
                 commitDelegate.selectItem(item)
             }

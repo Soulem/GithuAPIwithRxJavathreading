@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.githuapiwithrxjavathreading.databinding.FragmentCommitDisplayBinding
 import com.example.githuapiwithrxjavathreading.model.data.github.commit.GitRetrofitUserCommitItem
 import com.example.githuapiwithrxjavathreading.utl.GitAPISelector
@@ -50,7 +52,12 @@ class CommitDisplayFragment : Fragment() {
         binding.userNameTextView.text = gitRetrofitCommitItem.commit.author.name
 
         val tempString = gitRetrofitCommitItem.commit.author.date
-        val newDate = tempString.subSequence(5, 6).toString() +"-"+ tempString.subSequence(8, 9).toString()+ "-"+tempString.subSequence(0, 3).toString()
+        val newDate = tempString.subSequence(5, 7).toString() +"-"+ tempString.subSequence(8, 10).toString()+ "-"+tempString.subSequence(0, 4).toString()
+
+        Glide.with(binding.root)
+            .applyDefaultRequestOptions(RequestOptions().circleCrop())
+            .load(gitRetrofitCommitItem.author.avatar_url)
+            .into(binding.userIconImageview)
 
         binding.commitDateTextView.text = newDate
         val tempArray = gitRetrofitCommitItem.commit.message.split("\n\n")
