@@ -8,6 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:background="#e7f3ff">
 
         <ImageView
@@ -24,11 +25,11 @@
             android:id="@+id/user_name_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="32dp"
             android:text="@string/default_username"
             android:textColor="@color/black"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/user_profile_image"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,7 +40,7 @@
             android:background="@drawable/ic_key_icon"
             app:layout_constraintBottom_toBottomOf="@+id/user_profile_image"
             app:layout_constraintEnd_toEndOf="@+id/user_name_tv"
-            app:layout_constraintStart_toStartOf="@+id/user_name_tv"
+            app:layout_constraintStart_toEndOf="@+id/user_profile_image"
             app:layout_constraintTop_toBottomOf="@+id/user_name_tv" />
 
         <TextView
@@ -51,20 +52,9 @@
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/user_profile_image"
+            app:layout_constraintEnd_toEndOf="@+id/user_name_tv"
             app:layout_constraintStart_toEndOf="@+id/image_repo_icon"
             app:layout_constraintTop_toBottomOf="@+id/user_name_tv" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:background="@drawable/textview_border"
-            android:text=" "
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/user_profile_image" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

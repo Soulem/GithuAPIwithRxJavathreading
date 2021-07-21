@@ -8,15 +8,17 @@
         android:id="@+id/repo_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:background="#e7f3ff">
 
         <ImageView
             android:id="@+id/user_profile_image"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_margin="24dp"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_margin="16dp"
             android:background="@drawable/ic_repo_icon"
             android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,14 +27,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="24dp"
-            android:maxLength="16"
             android:ellipsize="end"
+            android:maxLength="16"
             android:maxLines="1"
             android:text="@string/repo_name_default"
             android:textColor="@color/black"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/user_profile_image"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -44,21 +45,9 @@
             android:text="@string/repo_date_default"
             android:textColor="@color/black"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/repo_name_textView" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:background="@drawable/textview_border"
-            android:text=" "
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/user_profile_image" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -9,6 +9,8 @@
         android:id="@+id/repo_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:paddingBottom="16dp"
         android:background="#e7f3ff">
 
         <ImageView
@@ -70,18 +72,6 @@
             app:layout_constraintStart_toEndOf="@+id/user_name_textView"
             app:layout_constraintTop_toTopOf="@+id/user_name_textView" />
 
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:background="@drawable/textview_border"
-            android:text=" "
-            app:layout_constraintTop_toBottomOf="@id/user_icon_imageview"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
