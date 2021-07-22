@@ -22,7 +22,11 @@ class ObjectViewModel: ViewModel() {
     val gitUserData = MutableLiveData<GitRetrofitUser>()
     private val compDisposable = CompositeDisposable()
 
-    init {
+    fun init() {
+
+    }
+
+    fun makeCallouts(){
         compDisposable.add(
             gitAPIComponent.getComponentRepository().readRepoFromRemoteSource("Soulem")
                 .observeOn(Schedulers.io())
@@ -198,5 +202,7 @@ class ObjectViewModel: ViewModel() {
             //high order function - function that can take
             //other functions as arguments or have a function as a return type
         )
-    }
+    }//search Commits
+
+
 }

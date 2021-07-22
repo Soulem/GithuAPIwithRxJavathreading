@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.multidex.MultiDex
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import com.example.githuapiwithrxjavathreading.R
 import com.example.githuapiwithrxjavathreading.databinding.ActivityMainBinding
 import com.example.githuapiwithrxjavathreading.model.data.github.commit.GitRetrofitUserCommitItem
@@ -11,6 +14,8 @@ import com.example.githuapiwithrxjavathreading.model.data.github.repo.GitRetrofi
 import com.example.githuapiwithrxjavathreading.model.data.github.user.GitRetrofitUser
 import com.example.githuapiwithrxjavathreading.utl.GitAPISelector
 import com.example.githuapiwithrxjavathreading.view.fragment.*
+import com.example.githuapiwithrxjavathreading.workmanager.UploadWorker
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity(), GitAPISelector {
     private lateinit var binding: ActivityMainBinding
@@ -29,6 +34,17 @@ class MainActivity : AppCompatActivity(), GitAPISelector {
             .add(R.id.detail_item_frame, searchFragment)
             .addToBackStack(searchFragment.tag)
             .commit()
+
+
+        val uploadWorkRequest =
+            PeriodicWorkRequestBuilder<UploadWorker>(24, TimeUnit.HOURS)
+                .build()
+
+        // Queue it up in the work manager.
+        // The WorkManager is a singleton that needs a context.
+        WorkManager
+            .getInstance(this)
+            .enqueueUniquePeriodicWork("My Work", ExistingPeriodicWorkPolicy.KEEP, uploadWorkRequest)
     }
 
     override fun openUserDetailsFragment(item: GitRetrofitUser) {
