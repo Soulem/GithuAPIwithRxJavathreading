@@ -37,23 +37,21 @@
             android:id="@+id/image_repo_icon"
             android:layout_width="16dp"
             android:layout_height="16dp"
+            android:layout_marginRight="8dp"
             android:background="@drawable/ic_key_icon"
             app:layout_constraintBottom_toBottomOf="@+id/user_profile_image"
-            app:layout_constraintEnd_toEndOf="@+id/user_name_tv"
-            app:layout_constraintStart_toEndOf="@+id/user_profile_image"
+            app:layout_constraintEnd_toStartOf="@+id/user_id_tv"
             app:layout_constraintTop_toBottomOf="@+id/user_name_tv" />
 
         <TextView
             android:id="@+id/user_id_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
             android:text="@string/default_id_user"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/user_profile_image"
             app:layout_constraintEnd_toEndOf="@+id/user_name_tv"
-            app:layout_constraintStart_toEndOf="@+id/image_repo_icon"
             app:layout_constraintTop_toBottomOf="@+id/user_name_tv" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

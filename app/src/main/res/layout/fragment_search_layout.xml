@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/git_username"
         android:layout_margin="16dp"
+        android:imeOptions="actionDone"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/search_user_button"
