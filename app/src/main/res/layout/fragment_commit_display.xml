@@ -18,29 +18,30 @@
 
         <ImageView
             android:id="@+id/user_icon_imageview"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="8dp"
             android:background="@drawable/ic_user_icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.53"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.405" />
+            app:layout_constraintVertical_bias="0.383" />
 
         <TextView
             android:id="@+id/user_name_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
             android:text="@string/default_username"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.536"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.474" />
+            app:layout_constraintVertical_bias="0.584" />
 
         <TextView
             android:id="@+id/commit_date_textView"
@@ -50,17 +51,17 @@
             android:maxLength="10"
             android:text="@string/repo_date_default"
             android:textColor="@color/black"
-            android:textSize="12sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.529"
+            app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.336" />
+            app:layout_constraintVertical_bias="0.257" />
 
         <TextView
             android:id="@+id/commit_title_textView"
-            android:layout_width="240dp"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:ellipsize="end"
@@ -69,14 +70,14 @@
             android:text="@string/commit_title_tv"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="24sp"
             android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.589"
+            app:layout_constraintHorizontal_bias="0.493"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.539" />
+            app:layout_constraintVertical_bias="0.725" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
