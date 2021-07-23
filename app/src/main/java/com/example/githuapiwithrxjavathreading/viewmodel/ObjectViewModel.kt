@@ -159,7 +159,7 @@ class ObjectViewModel: ViewModel() {
 
                 },  {throwable ->
                     Log.d("TAG_X", "Oops: ${throwable.localizedMessage}")
-                    val list = gitAPIComponent.getComponentRepository().readReposFromCache(DEFAULT_USERS)
+                    val list = gitAPIComponent.getComponentRepository().readReposFromCache(userName)
                     gitRepoData.postValue(list)
                 })
             //high order function - function that can take
@@ -184,7 +184,7 @@ class ObjectViewModel: ViewModel() {
 
                 },  {throwable ->
                     Log.d("TAG_X", "Oops: ${throwable.localizedMessage}")
-                    val list = gitAPIComponent.getComponentRepository().readCommitsFromCache(DEFAULT_USERS)
+                    val list = gitAPIComponent.getComponentRepository().readCommitsFromCache(userName)
                     gitCommitData.postValue(list)
                 })
             //high order function - function that can take

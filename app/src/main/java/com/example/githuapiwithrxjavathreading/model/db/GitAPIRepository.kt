@@ -1,5 +1,6 @@
 package com.example.githuapiwithrxjavathreading.model.db
 
+import com.example.githuapiwithrxjavathreading.model.data.github.commit.GitAPICommitCache
 import com.example.githuapiwithrxjavathreading.model.data.github.commit.GitRetrofitUserCommitItem
 import com.example.githuapiwithrxjavathreading.model.data.github.repo.GitAPIRepoCache
 import com.example.githuapiwithrxjavathreading.model.data.github.repo.GitRetrofitUserRepoItem
@@ -25,7 +26,8 @@ class GitAPIRepository  @Inject constructor(private val gitAPIRetrofit : GitAPIR
     fun readReposFromCache(userName : String): List<GitRetrofitUserRepoItem> {
         val cache = getDao().readRepoFromCache(userName)
         var list = mutableListOf<GitRetrofitUserRepoItem>()
-        list.addAll(Gson().fromJson(cache.data, Array<GitRetrofitUserRepoItem>::class.java))
+        if (cache != null)
+            list.addAll(Gson().fromJson(cache.data, Array<GitRetrofitUserRepoItem>::class.java))
         return list
     }
 
@@ -38,12 +40,14 @@ class GitAPIRepository  @Inject constructor(private val gitAPIRetrofit : GitAPIR
     fun readUserFromCache(): List<GitRetrofitUser> {
         val cache = getDao().readUserFromCache()
 
-        var gsonList = Gson().fromJson(cache.data, Array<GitRetrofitUser>::class.java)
+        var gsonList = mutableListOf<GitRetrofitUser>()
 
-        var list = mutableListOf<GitRetrofitUser>()
-        list.addAll(Gson().fromJson(cache.data, Array<GitRetrofitUser>::class.java))
+        for (user : GitAPIUserCache in cache){
+            gsonList.add(Gson().fromJson(user.data, GitRetrofitUser::class.java))
+        }
 
-        return list
+
+        return gsonList
     }
 
     fun readUserFromCache(userName : String): GitRetrofitUser {
@@ -75,6 +79,6 @@ class GitAPIRepository  @Inject constructor(private val gitAPIRetrofit : GitAPIR
     fun saveCommitsToCache(response: List<GitRetrofitUserCommitItem>){
         val json = Gson().toJson(response)
 
-        getDao().cacheRepoData((GitAPIRepoCache(response[0].author.login, json)))
+        getDao().cacheCommitData((GitAPICommitCache(response[0].author.login, json)))
     }
 }
