@@ -28,11 +28,18 @@ class MainActivityTest {
         Espresso.onView(withId(R.id.user_name_editText)).check(matches(withText(input)))
     }
 
-    @Test
-    fun testSearchUserButton() {
-        Espresso.onView(withId(R.id.user_name_editText)).perform(ViewActions.typeText(input))
-        Espresso.closeSoftKeyboard()
-        Espresso.onView(withId(R.id.search_user_button)).perform(click())
-    }
+//    @Test
+//    fun testSearchUserButton() {
+//        Espresso.onView(withId(R.id.user_name_editText)).perform(ViewActions.typeText(input))
+//        Espresso.closeSoftKeyboard()
+//        Espresso.onView(withId(R.id.search_user_button)).perform(click())
+//    }
+//
+//    @Test
+//    fun testOpenUserRepos() {
+//        Espresso.onView(withId(R.id.user_name_editText)).perform(ViewActions.typeText(input))
+//        Espresso.closeSoftKeyboard()
+//        Espresso.onView(withId(R.id.search_user_button)).perform(click())
+//    }
 
 }
