@@ -23,7 +23,7 @@ interface GitAPIDAO {
     fun readRepoFromCache(username: String): GitAPIRepoCache
 
     @Query("SELECT * FROM gitUser_cache")
-    fun readUserFromCache(): List<GitAPIUserCache>
+    fun readUserFromCache(): GitAPIUserCache
 
     @Query("SELECT * FROM gitUser_cache WHERE name = :username")
     fun readUserFromCache(username : String) : GitAPIUserCache

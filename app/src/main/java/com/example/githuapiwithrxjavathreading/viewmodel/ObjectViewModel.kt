@@ -27,7 +27,7 @@ class ObjectViewModel: ViewModel() {
     }
 
     fun makeCallouts(){
-        compDisposable.add(
+        /*compDisposable.add(
             gitAPIComponent.getComponentRepository().readRepoFromRemoteSource("Soulem")
                 .observeOn(Schedulers.io())
                 .subscribeOn(Schedulers.io())
@@ -48,7 +48,7 @@ class ObjectViewModel: ViewModel() {
                 })
             //high order function - function that can take
             //other functions as arguments or have a function as a return type
-        )
+        )*/
 
         compDisposable.add(
             gitAPIComponent.getComponentRepository().readUsersFromRemoteSource()
@@ -74,7 +74,7 @@ class ObjectViewModel: ViewModel() {
             //other functions as arguments or have a function as a return type
         )
 
-        compDisposable.add(
+        /*compDisposable.add(
             gitAPIComponent.getComponentRepository().readCommitsFromRemoteSource("Soulem", "AgeUPApp")
                 .observeOn(Schedulers.io())
                 .subscribeOn(Schedulers.io())
@@ -95,7 +95,7 @@ class ObjectViewModel: ViewModel() {
                 })
             //high order function - function that can take
             //other functions as arguments or have a function as a return type
-        )
+        )*/
     }
 
     override fun onCleared() {
@@ -129,29 +129,17 @@ class ObjectViewModel: ViewModel() {
     }
 
     fun searchUser(){
-        compDisposable.add(
-            gitAPIComponent.getComponentRepository().readUsersFromRemoteSource()
-                .observeOn(Schedulers.io())
-                .subscribeOn(Schedulers.io())
-                .map {
 
-                    gitAPIComponent.getComponentRepository().saveUserToCache(it)
-                    Log.d("TAG_X", "saving to cache - on ${Thread.currentThread().name}")
-                    it
-                }
-                .subscribe({results ->
-                    Log.d("TAG_X", "update LiveData on ${Thread.currentThread().name}")
-                    val list :List<GitRetrofitUser> = results
-                    gitUsersData.postValue(list)
 
-                },  {throwable ->
-                    Log.d("TAG_X", "Oops: ${throwable.localizedMessage}")
-                    val list = gitAPIComponent.getComponentRepository().readUserFromCache()
-                    gitUsersData.postValue(list)
-                })
-            //high order function - function that can take
-            //other functions as arguments or have a function as a return type
-        )
+        Thread(Runnable{
+            try {
+                val list = gitAPIComponent.getComponentRepository().readUserFromCache()
+                gitUsersData.postValue(list)
+            } catch (e : Exception) {
+                Log.d("TAG_X", "Oops: ${e.message}")
+
+            }
+        }).start()
     }
 
     fun searchRepos(userName : String){

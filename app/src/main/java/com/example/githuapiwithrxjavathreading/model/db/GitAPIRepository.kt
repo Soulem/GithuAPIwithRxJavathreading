@@ -24,10 +24,9 @@ class GitAPIRepository  @Inject constructor(private val gitAPIRetrofit : GitAPIR
 
     fun readReposFromCache(userName : String): List<GitRetrofitUserRepoItem> {
         val cache = getDao().readRepoFromCache(userName)
-        return if (cache == null)
-            emptyList();
-        else
-            listOf(Gson().fromJson(cache.data, GitRetrofitUserRepoItem::class.java))
+        var list = mutableListOf<GitRetrofitUserRepoItem>()
+        list.addAll(Gson().fromJson(cache.data, Array<GitRetrofitUserRepoItem>::class.java))
+        return list
     }
 
     fun saveReposToCache(response: List<GitRetrofitUserRepoItem>){
@@ -38,10 +37,12 @@ class GitAPIRepository  @Inject constructor(private val gitAPIRetrofit : GitAPIR
 
     fun readUserFromCache(): List<GitRetrofitUser> {
         val cache = getDao().readUserFromCache()
-        val list = mutableListOf<GitRetrofitUser>()
-        for (user : GitAPIUserCache in cache){
-            list.add(Gson().fromJson(user.data, GitRetrofitUser::class.java))
-        }
+
+        var gsonList = Gson().fromJson(cache.data, Array<GitRetrofitUser>::class.java)
+
+        var list = mutableListOf<GitRetrofitUser>()
+        list.addAll(Gson().fromJson(cache.data, Array<GitRetrofitUser>::class.java))
+
         return list
     }
 
@@ -53,26 +54,27 @@ class GitAPIRepository  @Inject constructor(private val gitAPIRetrofit : GitAPIR
     fun saveUserToCache(response: GitRetrofitUser){
         val json = Gson().toJson(response)
         // userName = response[0].owner.login
-        getDao().cacheRepoData((GitAPIRepoCache(response.login, json)))
+        getDao().cacheUserData((GitAPIUserCache(response.login, json)))
     }
 
     fun saveUserToCache(response: List<GitRetrofitUser>){
         val json = Gson().toJson(response)
-        // userName = response[0].owner.login
-        getDao().cacheRepoData((GitAPIRepoCache(response[0].login, json)))
+
+        getDao().cacheUserData((GitAPIUserCache(response[0].login, json)))
     }
 
     fun readCommitsFromCache(userName : String): List<GitRetrofitUserCommitItem> {
         val cache = getDao().readCommitFromCache(userName)
-        return if (cache == null)
-            emptyList();
-        else
-            listOf(Gson().fromJson(cache.data, GitRetrofitUserCommitItem::class.java))
+
+        var list = mutableListOf<GitRetrofitUserCommitItem>()
+        list.addAll(Gson().fromJson(cache.data, Array<GitRetrofitUserCommitItem>::class.java))
+
+        return list
     }
 
     fun saveCommitsToCache(response: List<GitRetrofitUserCommitItem>){
         val json = Gson().toJson(response)
-        // userName = response[0].owner.login
+
         getDao().cacheRepoData((GitAPIRepoCache(response[0].author.login, json)))
     }
 }
